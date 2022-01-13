@@ -52,9 +52,9 @@ class QLearning:
         self.maxTau = 10000
         self.tau = 0
         # reset the graph i guess, I don't know why therefore is already a graph happening but who cares
-        tf.reset_default_graph()
+        tf.compat.v1.reset_default_graph()
 
-        self.sess = tf.Session()
+        self.sess = tf.compat.v1.Session()
 
         self.DQNetwork = DQN(self.stateSize, self.actionSize, self.learningRate, name='DQNetwork')
         self.TargetNetwork = DQN(self.stateSize, self.actionSize, self.learningRate, name='TargetNetwork')
@@ -272,7 +272,7 @@ class DQN:
         self.learningRate = learningRate
         self.name = name
 
-        with tf.variable_scope(self.name):
+        with tf.compat.v1.variable_scope(self.name):
             # the inputs describing the state
             self.inputs_ = tf.placeholder(tf.float32, [None, *self.stateSize], name="inputs")
 
@@ -321,7 +321,7 @@ class DDQN:
         self.learningRate = learningRate
         self.name = name
 
-        with tf.variable_scope(self.name):
+        with tf.compat.v1.variable_scope(self.name):
             # the inputs describing the state
             self.inputs_ = tf.placeholder(tf.float32, [None, *self.stateSize], name="inputs")
 
